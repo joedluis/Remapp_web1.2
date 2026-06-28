@@ -4,6 +4,8 @@ import com.example.demo.entity.Producto;
 import com.example.demo.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductoService {
 
@@ -16,5 +18,11 @@ public class ProductoService {
     public Producto guardarPoducto(Producto producto) {
         return productoRepository.save(producto);
     }
+
+    public List<Producto> listarProductos() {
+        return productoRepository.findAll();
+    }
+
+
 
 }
