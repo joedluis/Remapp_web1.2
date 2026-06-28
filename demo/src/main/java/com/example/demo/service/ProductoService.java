@@ -5,6 +5,7 @@ import com.example.demo.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductoService {
@@ -15,7 +16,7 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public Producto guardarPoducto(Producto producto) {
+    public Producto guardarProducto(Producto producto) {
         return productoRepository.save(producto);
     }
 
@@ -23,6 +24,28 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
+    public Optional<Producto> buscarproductoPorId(Integer idProducto) {
+        return productoRepository.findById(idProducto);
+    }
 
+    public Producto actualizarProducto(Integer idProducto, Producto producto) {
+
+        Optional<Producto> productoExistente = productoRepository.findById(idProducto);
+
+        if (productoExistente.isPresent()) {
+
+            Producto productoActual = productoExistente.get();
+
+            productoActual.setNombre(producto.getNombre());
+            productoActual.setPrecio(producto.getPrecio());
+            productoActual.setStock(producto.getStock());
+
+            return productoRepository.save(productoActual);
+
+        }
+
+        throw new RuntimeException("Producto no encontrado");
+
+    }
 
 }
