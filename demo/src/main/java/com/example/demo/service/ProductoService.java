@@ -45,7 +45,21 @@ public class ProductoService {
         }
 
         throw new RuntimeException("Producto no encontrado");
+    }
 
+    public void eliminarProducto(Integer idProducto) {
+
+        Optional<Producto> productoExistente = productoRepository.findById(idProducto);
+
+        if (productoExistente.isPresent()) {
+
+            productoRepository.deleteById(idProducto);
+
+        } else {
+
+            throw new RuntimeException("Producto no encontrado");
+
+        }
     }
 
 }
