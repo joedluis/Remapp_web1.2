@@ -4,6 +4,7 @@ import com.example.demo.entity.Producto;
 import com.example.demo.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,14 +38,28 @@ public class ProductoController {
         return productoService.listarProductos();
     }
 
-    // 3 ===== BUSCAR =====
+    // 3 ===== BUSCAR POR ID =====
     @GetMapping("/{idProducto}")
     public Optional<Producto> buscarProductoPorId(@PathVariable Integer idProducto) {
         return productoService.buscarproductoPorId(idProducto);
-
     }
 
+    // 4 ===== ACTUALIZAR =====
+    @PutMapping("/{idProducto}")
+    public Producto actualizarProducto(@PathVariable Integer idProducto,
+                                        @RequestBody Producto producto) {
 
+        return productoService.actualizarProducto(idProducto, producto);
+    }
+
+    // 5 ===== ELIMINAR =====
+    @DeleteMapping("/{idProducto}")
+    public void eliminarProducto(@PathVariable Integer idProducto) {
+
+
+       productoService.eliminarProducto(idProducto);
+
+    }
 
 
 
