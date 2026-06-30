@@ -3,17 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.entity.Producto;
 import com.example.demo.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import com.example.demo.entity.Producto;
-
 // ====== Anotaciones =====
 @RestController
-@RequestMapping("/productos")
+@RequestMapping("/api/productos")
 
 // ======
 public class ProductoController {
@@ -24,27 +19,27 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    // ===== METODOS =====
+    // ===== ENDPOINTS =====
 
-    // 1 ===== GUARDAR =====
+    // 1 ===== POST (GUARDAR) =====
     @PostMapping
     public Producto guardarProducto(@RequestBody Producto producto) {
         return productoService.guardarProducto(producto);
     }
 
-    // 2 ===== LISTAR ======
+    // 2 ===== GET (LISTAR) ======
     @GetMapping
     public List<Producto> listarProductos() {
         return productoService.listarProductos();
     }
 
-    // 3 ===== BUSCAR POR ID =====
+    // 3 ===== GET (BUSCAR POR ID) =====
     @GetMapping("/{idProducto}")
     public Optional<Producto> buscarProductoPorId(@PathVariable Integer idProducto) {
-        return productoService.buscarproductoPorId(idProducto);
+        return productoService.buscarProductoPorId(idProducto);
     }
 
-    // 4 ===== ACTUALIZAR =====
+    // 4 ===== PUT (ACTUALIZAR) =====
     @PutMapping("/{idProducto}")
     public Producto actualizarProducto(@PathVariable Integer idProducto,
                                         @RequestBody Producto producto) {
@@ -52,7 +47,7 @@ public class ProductoController {
         return productoService.actualizarProducto(idProducto, producto);
     }
 
-    // 5 ===== ELIMINAR =====
+    // 5 ===== DELETE (ELIMINAR)  =====
     @DeleteMapping("/{idProducto}")
     public void eliminarProducto(@PathVariable Integer idProducto) {
 
@@ -60,7 +55,5 @@ public class ProductoController {
        productoService.eliminarProducto(idProducto);
 
     }
-
-
 
 }
